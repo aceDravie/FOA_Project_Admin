@@ -87,7 +87,7 @@ const AddCategory = ({ open, onClose, onCategoryAdded }) => {
           },
         }}
       >
-        <DialogTitle>Add Category</DialogTitle>
+        <DialogTitle>  Add Category</DialogTitle>
         <DialogContent>
           <TextField
             label="Name"

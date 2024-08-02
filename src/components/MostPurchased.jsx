@@ -11,7 +11,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 const MostPurchased = () => {
   const [data] = useState([
@@ -24,9 +24,11 @@ const MostPurchased = () => {
 
   return (
     <div>
+      <Box>
       <Typography sx={{ fontWeight: "bold", color: "#333" }}>
-        MOST PURCHASED
+        MOST PURCHASED FOOD:
       </Typography>
+
       <ResponsiveContainer width="100%" height={400}>
         {/* Uncomment this block if you prefer BarChart */}
         {/* <BarChart
@@ -36,22 +38,22 @@ const MostPurchased = () => {
             right: 30,
             left: 20,
             bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
-        </BarChart> */}
+            }}
+            >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="count" fill="#8884d8" />
+            </BarChart> */}
 
         <AreaChart
           width={730}
           height={250}
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
+          >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -72,9 +74,10 @@ const MostPurchased = () => {
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#colorUv)"
-          />
+            />
         </AreaChart>
       </ResponsiveContainer>
+            </Box>
     </div>
   );
 };

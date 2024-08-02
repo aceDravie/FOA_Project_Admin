@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import {
   ComposedChart,
@@ -28,6 +29,12 @@ const data = [
 
 const FoodOrderChart = () => {
   return (
+    <>
+    <Box>
+    <Typography sx={{ fontWeight: "bold", color: "#333" }}>
+    MONTHLY FOOD ORDER ANALYSIS:
+    </Typography>
+
     <ResponsiveContainer width="100%" height={400}>
       <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
@@ -47,11 +54,13 @@ const FoodOrderChart = () => {
           stroke="#8884d8"
           fillOpacity={1}
           fill="url(#colorPizza)"
-        />
+          />
         <Line type="monotone" dataKey="burger" stroke="crimson" />
         <Line type="monotone" dataKey="sushi" stroke="#ffc658" />
       </ComposedChart>
     </ResponsiveContainer>
+          </Box>
+          </>
   );
 };
 

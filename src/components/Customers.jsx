@@ -13,12 +13,13 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
+
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../helpers/firebase";
+import { Person } from "@mui/icons-material";
 
 const Customers = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -93,7 +94,7 @@ const Customers = () => {
         variant="contained"
         color="primary"
         onClick={handleClick}
-        startIcon={<InfoIcon />}
+        startIcon={<Person/>}
       >
         PRINT CUSTOMERS
       </Button>
@@ -106,13 +107,13 @@ const Customers = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Image</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Image</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Name</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Address</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Phone</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Location</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Status</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

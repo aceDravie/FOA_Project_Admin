@@ -105,25 +105,25 @@ const Widget = ({ title }) => {
     case "CUSTOMERS":
       data = {
         icon: <PersonOutlinedIcon />,
-        link: "See all customers",
+        // link: "See all customers",
         bgColor: "#e3f2fd",
-        to: `/dashboard/${adminID}/customers`,
+        // to: `/dashboard/${adminID}/customers`,
       };
       break;
     case "TOTAL REVENUE":
       data = {
         icon: <MonetizationOnOutlinedIcon />,
-        link: "View revenue details",
+        // link: "View revenue details",
         bgColor: "#e8f5e9",
-        to: "/revenue",
+        // to: "/revenue",
       };
       break;
     case "ORDERS":
       data = {
         icon: <ShoppingCartOutlinedIcon />,
-        link: "View all orders",
+        // link: "View all orders",
         bgColor: "#fff3e0",
-        to: `/dashboard/${adminID}`,
+        // to: `/dashboard/${adminID}`,
       };
       break;
     default:

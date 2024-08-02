@@ -24,6 +24,7 @@ import {
   Checkbox,
   ListItemText,
 } from "@mui/material";
+import PlaylistAddTwoToneIcon from '@mui/icons-material/PlaylistAddTwoTone';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddFood from "../mod/AddFood";
@@ -378,6 +379,8 @@ const Food = () => {
           variant="contained"
           onClick={() => handleAdd(title.toLowerCase())}
         >
+          <PlaylistAddTwoToneIcon/>
+         
           {addButtonText}
         </Button>
       </Box>

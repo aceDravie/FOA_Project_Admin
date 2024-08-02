@@ -13,6 +13,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from "@mui/icons-material/Info";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -123,6 +124,7 @@ const AllOrders = () => {
           variant="contained"
           sx={{ mb: 2 }}
         >
+          <ShoppingCartIcon/>
           PRINT ORDERS
         </Button>
         <Menu
@@ -165,11 +167,11 @@ const AllOrders = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Order Time</TableCell>
-              <TableCell>Order Type</TableCell>
-              <TableCell>Total Price GH₵</TableCell>
-              <TableCell>Customer Name</TableCell>
-              <TableCell>Details</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Order Time</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Order Type</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Total Price GH₵</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Customer Name</TableCell>
+              <TableCell sx={{fontWeight: "bold"}}>Details</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
