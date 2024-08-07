@@ -88,7 +88,7 @@ const Complains = () => {
 
   useEffect(() => {
     const filtered = customers.filter((customer) =>
-      customer.name.toLowerCase().includes(searchQuery.toLowerCase())
+      customer.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredCustomers(filtered);
   }, [searchQuery, customers]);

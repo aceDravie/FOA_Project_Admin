@@ -20,7 +20,7 @@ import Badge from "@mui/material/Badge";
 import { TapasRounded, People } from "@mui/icons-material";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import FoodBankIcon from '@mui/icons-material/FoodBank';
+import FoodBankIcon from "@mui/icons-material/FoodBank";
 import Profile from "../mod/Profile";
 
 const settings = ["Profile", "Logout"];
@@ -106,12 +106,7 @@ function Navbar() {
   };
 
   const handleLogout = async () => {
-    try {
-      dispatch({ type: "LOGOUT" });
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+    navigate("/login");
   };
 
   const handleOpenProfile = () => {

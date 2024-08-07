@@ -13,7 +13,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import InfoIcon from "@mui/icons-material/Info";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -23,7 +23,7 @@ const AllOrders = () => {
   const [orders] = useState([
     {
       id: "1",
-      orderTime: "2024-07-25T15:30:00Z",
+      orderTime: "25 July 2024 at 15:30:00 UTC+00:00",
       orderType: "Delivery",
       totalPrice: 25.5,
       clientId: "c1",
@@ -36,7 +36,7 @@ const AllOrders = () => {
     },
     {
       id: "2",
-      orderTime: "2024-07-25T16:00:00Z",
+      orderTime: "25 July 2024 at 16:00:00 UTC+00:00",
       orderType: "Pickup",
       totalPrice: 18.75,
       clientId: "c2",
@@ -109,8 +109,54 @@ const AllOrders = () => {
   };
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString();
+    dateString = dateString.replace(/^"|"$/g, "");
+
+    if (dateString.includes(" at ")) {
+      const [datePart, timePart] = dateString.split(" at ");
+      const [day, month, year] = datePart.split(" ");
+      const [time, timezone] = timePart.split(" ");
+      const [hours, minutes, seconds] = time.split(":");
+
+      const date = new Date(
+        Date.UTC(year, getMonthIndex(month), day, hours, minutes, seconds)
+      );
+
+      const options = {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+        timeZone: "UTC",
+      };
+
+      return date.toLocaleString("en-US", options) + " " + timezone;
+    } else {
+      // If it's not in the custom format, try to parse it as a standard date string
+      const date = new Date(dateString);
+      return date.toLocaleString();
+    }
+  };
+
+  // Helper function to get month index
+  const getMonthIndex = (monthName) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months.indexOf(monthName);
   };
 
   return (
@@ -124,7 +170,7 @@ const AllOrders = () => {
           variant="contained"
           sx={{ mb: 2 }}
         >
-          <ShoppingCartIcon/>
+          <ShoppingCartIcon />
           PRINT ORDERS
         </Button>
         <Menu
@@ -167,11 +213,11 @@ const AllOrders = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{fontWeight: "bold"}}>Order Time</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Order Type</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Total Price GH₵</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Customer Name</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Details</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Order Time</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Order Type</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Total Price GH₵</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Customer Name</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Details</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

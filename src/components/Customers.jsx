@@ -56,9 +56,9 @@ const Customers = () => {
     const workBook = XLSX.utils.book_new();
     const workSheet = XLSX.utils.json_to_sheet(
       customers.map((customer) => ({
-        Name: customer.name,
+        Name: `${customer.firstName} ${customer.lastName }`,
         Address: customer.address,
-        Phone: customer.phone,
+        Phone: customer.contact,
         Location: customer.location,
         Status: customer.status,
       }))
@@ -72,12 +72,11 @@ const Customers = () => {
     const doc = new jsPDF();
     doc.text("All Customers", 20, 10);
     doc.autoTable({
-      head: [["Name", "Address", "Phone", "Location", "Status"]],
+      head: [["Name", "Address", "Phone", "Status"]],
       body: customers.map((customer) => [
         customer.name,
         customer.address,
-        customer.phone,
-        customer.location,
+        customer.contact,
         customer.status,
       ]),
     });
@@ -94,7 +93,7 @@ const Customers = () => {
         variant="contained"
         color="primary"
         onClick={handleClick}
-        startIcon={<Person/>}
+        startIcon={<Person />}
       >
         PRINT CUSTOMERS
       </Button>
@@ -107,25 +106,23 @@ const Customers = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{fontWeight: "bold"}}>Image</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Name</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Address</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Phone</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Location</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Status</TableCell>
-              <TableCell sx={{fontWeight: "bold"}}>Actions</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Image</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Address</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Phone</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Status</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {customers.map((customer) => (
               <TableRow key={customer.id}>
                 <TableCell>
-                  <Avatar src={customer.image} alt={customer.name} />
+                  <Avatar src={customer.imageUrl} alt={customer.name} />
                 </TableCell>
-                <TableCell>{customer.name}</TableCell>
+                <TableCell>{customer.firstName} {customer.lastName}</TableCell>
                 <TableCell>{customer.address}</TableCell>
-                <TableCell>{customer.phone}</TableCell>
-                <TableCell>{customer.location}</TableCell>
+                <TableCell>{customer.contact}</TableCell>
                 <TableCell>{customer.status ? "Active" : "InActive"}</TableCell>
                 <TableCell>
                   <Button
