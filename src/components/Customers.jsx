@@ -12,6 +12,7 @@ import {
   Paper,
   Avatar,
   Box,
+  TablePagination,
 } from "@mui/material";
 
 import jsPDF from "jspdf";
@@ -25,7 +26,7 @@ const Customers = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [customers, setCustomers] = useState([]);
   const open = Boolean(anchorEl);
-
+const [showAllCustomers, setShowAllcustomers] = useState(false)
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -56,7 +57,7 @@ const Customers = () => {
     const workBook = XLSX.utils.book_new();
     const workSheet = XLSX.utils.json_to_sheet(
       customers.map((customer) => ({
-        Name: `${customer.firstName} ${customer.lastName }`,
+        Name: `${customer.firstName} ${customer.lastName}`,
         Address: customer.address,
         Phone: customer.contact,
         Location: customer.location,
@@ -101,7 +102,9 @@ const Customers = () => {
         <MenuItem onClick={handleExportPDF}>PDF</MenuItem>
         <MenuItem onClick={handleExportExcel}>Excel</MenuItem>
       </Menu>
-
+      <Button variant="contained" >
+          {showAllCustomers ? "Hide Orders" : "Show Orders"}
+        </Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -110,8 +113,6 @@ const Customers = () => {
               <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
               <TableCell sx={{ fontWeight: "bold" }}>Address</TableCell>
               <TableCell sx={{ fontWeight: "bold" }}>Phone</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }}>Status</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -120,26 +121,17 @@ const Customers = () => {
                 <TableCell>
                   <Avatar src={customer.imageUrl} alt={customer.name} />
                 </TableCell>
-                <TableCell>{customer.firstName} {customer.lastName}</TableCell>
+                <TableCell>
+                  {customer.firstName} {customer.lastName}
+                </TableCell>
                 <TableCell>{customer.address}</TableCell>
                 <TableCell>{customer.contact}</TableCell>
-                <TableCell>{customer.status ? "Active" : "InActive"}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color={
-                      customer.status === "active" ? "secondary" : "primary"
-                    }
-                    onClick={() => toggleStatus(customer.id)}
-                  >
-                    {customer.status === "active" ? "Deactivate" : "Activate"}
-                  </Button>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer>{" "}
+
     </Box>
   );
 };
