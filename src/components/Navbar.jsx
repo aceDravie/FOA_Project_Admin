@@ -303,7 +303,7 @@ function Navbar() {
                   <People />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Complaints">
+              <Tooltip title="Messages">
                 <IconButton
                   onClick={handleOpenComplaints}
                   sx={{ p: 0, mx: 1 }}

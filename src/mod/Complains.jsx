@@ -143,7 +143,7 @@ const Complains = () => {
           mode: "sent",
           customerIds: selectedCustomers,
           recipients: selectedCustomers.map(
-            (id) => customers.find((c) => c.id === id).name
+            (id) => customers.find((c) => c.id === id).firstName
           ),
         };
 
@@ -223,7 +223,7 @@ const Complains = () => {
       </List>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>New Complaint</DialogTitle>
+        <DialogTitle>New Message</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -290,7 +290,7 @@ const Complains = () => {
                   onChange={() => handleCustomerSelect(customer.id)}
                 />
               }
-              label={customer.name}
+              label={customer.firstName}
             />
           ))}
         </DialogContent>

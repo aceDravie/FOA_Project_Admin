@@ -26,7 +26,11 @@ const Customers = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [customers, setCustomers] = useState([]);
   const open = Boolean(anchorEl);
-const [showAllCustomers, setShowAllcustomers] = useState(false)
+  const [showAllCustomers, setShowAllcustomers] = useState(false);
+  const handleShowAllCustomers = () => {
+    setShowAllcustomers(!showAllCustomers);
+  };
+
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -90,48 +94,58 @@ const [showAllCustomers, setShowAllcustomers] = useState(false)
 
   return (
     <Box my={5}>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-        startIcon={<Person />}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        PRINT CUSTOMERS
-      </Button>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={handleExportPDF}>PDF</MenuItem>
-        <MenuItem onClick={handleExportExcel}>Excel</MenuItem>
-      </Menu>
-      <Button variant="contained" >
-          {showAllCustomers ? "Hide Orders" : "Show Orders"}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+          startIcon={<Person />}
+        >
+          PRINT CUSTOMERS
         </Button>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "bold" }}>Image</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }}>Address</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }}>Phone</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {customers.map((customer) => (
-              <TableRow key={customer.id}>
-                <TableCell>
-                  <Avatar src={customer.imageUrl} alt={customer.name} />
-                </TableCell>
-                <TableCell>
-                  {customer.firstName} {customer.lastName}
-                </TableCell>
-                <TableCell>{customer.address}</TableCell>
-                <TableCell>{customer.contact}</TableCell>
+        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          <MenuItem onClick={handleExportPDF}>PDF</MenuItem>
+          <MenuItem onClick={handleExportExcel}>Excel</MenuItem>
+        </Menu>
+        <Button variant="contained" onClick={handleShowAllCustomers}>
+          {showAllCustomers ? "Hide Customers" : "Show Customers"}
+        </Button>
+      </div>
+      <>
+      {showAllCustomers? (<> <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontWeight: "bold" }}>Image</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Address</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Phone</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>{" "}
-
+            </TableHead>
+            <TableBody>
+              {customers.map((customer) => (
+                <TableRow key={customer.id}>
+                  <TableCell>
+                    <Avatar src={customer.imageUrl} alt={customer.name} />
+                  </TableCell>
+                  <TableCell>
+                    {customer.firstName} {customer.lastName}
+                  </TableCell>
+                  <TableCell>{customer.address}</TableCell>
+                  <TableCell>{customer.contact}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>{" "}</>):("")}
+        
+      </>
     </Box>
   );
 };
